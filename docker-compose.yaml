@@ -1,0 +1,38 @@
+version: '3'
+
+# volumes:
+#   postgres_data:
+#       driver: local
+
+services:
+#   postgres:
+#       image: postgres
+#       volumes:
+#         - postgres_data:/var/lib/postgresql/data
+#       environment:
+#         POSTGRES_DB: keycloak
+#         POSTGRES_USER: keycloak
+#         POSTGRES_PASSWORD: password
+  keycloak:
+      image: jboss/keycloak:latest
+      # volumes:
+      # - /home/tfa/setup/keycloak/tmp:/opt/jboss/keycloak/themes  
+      #image: ems-keycloak:xm
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: 172.26.198.222
+        DB_DATABASE: keycloak-yif
+        DB_USER: kong
+        DB_SCHEMA: public
+        DB_PASSWORD: kong
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: admin
+        # PROXY_ADDRESS_FORWARDING: "true"
+        # KEYCLOAK_FRONTEND_URL: https://172.26.198.222:8443/auth
+        
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+        #JDBC_PARAMS: "ssl=true"
+      ports:
+        - 8082:8080
+    #   depends_on:
+    #     - postgres
