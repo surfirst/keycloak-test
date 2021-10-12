@@ -15,6 +15,7 @@ class Secured extends Component {
     })
 
     console.log({ keycloak })
+    
   }
 
   render() {
@@ -29,7 +30,14 @@ class Secured extends Component {
               this.state.keycloak.logout()
             }}
           > Logout</button></p>
-          <p>ID Token:<br />{this.state.keycloak.idToken}</p>
+          <p><button
+            type="button"
+            onClick={(e) => {
+              this.state.keycloak.accountManagement()
+            }}
+          > Account</button></p>
+          
+          {/* <p>ID Token:<br />{this.state.keycloak.}</p> */}
         </div>
       ); else return (<div>Unable to authenticate!</div>)
     }
